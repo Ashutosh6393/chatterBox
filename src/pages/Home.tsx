@@ -1,67 +1,73 @@
 import { Button } from "@/components/ui/button";
 import { FaGithub } from "react-icons/fa";
+import { DiRedis } from "react-icons/di";
+import { RiNotificationBadgeFill } from "react-icons/ri";
+import { SiAmazonrds } from "react-icons/si";
+
+import Card from "@/components/home/Card";
 
 import {
-  BellIcon,
-  CalendarIcon,
-  FileTextIcon,
-  GlobeIcon,
-  InputIcon,
-} from "@radix-ui/react-icons";
-
-import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
+  SiApachekafka,
+  SiTypescript,
+  SiSocketdotio,
+  SiClerk,
+} from "react-icons/si";
 
 import { Link } from "react-router";
 
 type Props = {};
 
 export default function Home({}: Props) {
-  const features = [
+  const cardData = [
     {
-      Icon: FileTextIcon,
-      name: "Save your files",
-      description: "We automatically save your files as you type.",
-      href: "/",
-      cta: "Learn more",
-      background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
-    },
-    {
-      Icon: InputIcon,
-      name: "Full text search",
-      description: "Search through all your files in one place.",
-      href: "/",
-      cta: "Learn more",
-      background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
-    },
-    {
-      Icon: GlobeIcon,
-      name: "Multilingual",
-      description: "Supports 100+ languages and counting.",
-      href: "/",
-      cta: "Learn more",
-      background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
-    },
-    {
-      Icon: CalendarIcon,
-      name: "Calendar",
-      description: "Use the calendar to filter your files by date.",
-      href: "/",
-      cta: "Learn more",
-      background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
-    },
-    {
-      Icon: BellIcon,
-      name: "Notifications",
+      title: "Modern Stack",
       description:
-        "Get notified when someone shares a file or mentions you in a comment.",
-      href: "/",
-      cta: "Learn more",
-      background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
+        "Powered by Redis, Kafka, TypeScript, and more for high performance.",
+      bg: (
+        <div className="flex gap-32">
+          <DiRedis className="text-7xl text-stone-700"/> <SiApachekafka className="text-7xl text-stone-900"/> <SiTypescript className="text-7xl text-stone-900"/>
+        </div>
+      ),
+      large: true,
+    },
+    {
+      title: "Real-time Communication",
+      description:
+        "ChatterBox uses Socket.io for instant message delivery with low latency.",
+      bg: (
+        <div>
+          <SiSocketdotio className="text-7xl text-stone-900" />
+        </div>
+      ),
+    },
+    {
+      title: "Seamless Authentication",
+      description: "Secure and smooth user authentication powered by Clerk.",
+      bg: (
+        <div>
+          <SiClerk className="text-7xl text-stone-900"/>
+        </div>
+      ),
+    },
+    {
+      title: "Built for Scale",
+      description:
+        "Designed for scalability and can handle high traffic loads.",
+      bg: (
+        <div>
+          <SiAmazonrds className="text-7xl text-stone-900"/>
+        </div>
+      ),
+    },
+
+    {
+      title: "Real-Time Alerts",
+      description: "ChatterBox sends real-time alerts to your team members.",
+      bg: (
+        <div>
+          <RiNotificationBadgeFill className="text-7xl text-stone-900"/>
+        </div>
+      ),
     },
   ];
 
@@ -83,18 +89,16 @@ export default function Home({}: Props) {
           scalable chat application.
         </p>
         <div className="mt-6 flex justify-center">
-          <Button asChild className="rounded-full bg-stone-800">
+          <Button asChild className="rounded-full bg-stone-800 shadow-gray-500 shadow-md">
             <Link to="/login">Start Server</Link>
           </Button>
         </div>
       </div>
 
-      <div className="mt-12">
-        <BentoGrid className="lg:grid-rows-3">
-          {features.map((feature) => (
-            <BentoCard key={feature.name} {...feature} />
-          ))}
-        </BentoGrid>
+      <div className="z-10 mt-12 w-full grid grid-cols-3 gap-4">
+        {cardData.map((card, index) => (
+          <Card key={index} {...card} />
+        ))}
       </div>
     </>
   );
