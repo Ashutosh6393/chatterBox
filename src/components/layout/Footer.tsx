@@ -4,7 +4,7 @@ import { SiBuymeacoffee } from "react-icons/si";
 const Footer = () => {
   return (
     <footer className="w-full z-50 absolute py-5">
-      <div className="max-w-7xl mx-auto w-full flex flex-col gap-4 justify-center items-center">
+      <div className="max-w-7xl px-5 mx-auto w-full flex flex-col gap-4 justify-center items-center">
         <p className="text-gray-500">
           A project by{" "}
           <a href="" className="text-gray-700 underline font-semibold">
