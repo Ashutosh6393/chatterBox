@@ -1,21 +1,51 @@
 import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
+import { authClient } from "@/lib/auth-client";
 
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
 import useScroll from "@/lib/hooks/useScroll";
+import { useEffect, useState } from "react";
+
+const loginHandler = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: import.meta.env.VITE_BASE_URL + "/chat",
+  });
+
+  console.log(data);
+};
+
+const logoutHandler = async () => {
+  const data = await authClient.signOut();
+
+  console.log(data);
+};
 
 const Navbar = () => {
   const scrolled = useScroll(10);
+
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    async function checkAuth() {
+      const { data: session, error } = await authClient.getSession();
+      if (error) {
+        console.error(error);
+      }
+
+      setSession(session);
+    }
+
+    checkAuth();
+  }, []);
 
   return (
     <div
@@ -33,19 +63,21 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <Dialog >
-          <DialogTrigger>
-            <Button className="rounded-full font-normal text-xs md:text-sm lg:text-base">
+        {session ? (
+          <Button onClick={logoutHandler}>Logout</Button>
+        ) : (
+          <Dialog>
+            <DialogTrigger className="rounded-full font-normal text-xs md:text-sm lg:text-base">
               Login
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className="text-center">Login</DialogTitle>
-            </DialogHeader>
-            <Button>Login with Google</Button>
-          </DialogContent>
-        </Dialog>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className="text-center">Login</DialogTitle>
+              </DialogHeader>
+              <Button onClick={loginHandler}>Login with Google</Button>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
     </div>
   );

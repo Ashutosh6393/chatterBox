@@ -18,6 +18,7 @@ import { Link } from "react-router";
 type Props = {};
 
 export default function Home({}: Props) {
+  
   const cardData = [
     {
       title: "Modern Stack",
