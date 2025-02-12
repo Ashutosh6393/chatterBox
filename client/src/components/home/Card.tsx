@@ -17,11 +17,13 @@ const Card = ({ title, description, bg, large = false }: Props) => {
       <div className="flex-1 w-full flex items-center justify-center group-hover:scale-95 transition-all">
         {bg}
       </div>
-      <h1 className="text-2xl font-semibold bg-gradient-to-br from-black to-gray-800 bg-clip-text text-transparent ">
+      <h1 className="text-2xl font-semibold bg-gradient-to-br from-black to-zinc-600 bg-clip-text text-transparent ">
         {title}
       </h1>
-      <p className="mt-3 text-center text-gray-700 mb-5 text-balance ">
-        {description}
+      <p className="mt-3 text-center text-zinc-700 mb-5 text-balance ">
+        {description} 
+        
+        
       </p>
     </div>
   );
