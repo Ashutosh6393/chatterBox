@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Markdown from "react-markdown";
 
 type Props = {
   title: string;
@@ -14,17 +15,35 @@ const Card = ({ title, description, bg, large = false }: Props) => {
         large ? "md:col-span-2" : ""
       }`}
     >
-      <div className="flex-1 w-full flex items-center justify-center group-hover:scale-95 transition-all">
+      <div className="flex-1 w-full flex items-center justify-center group-hover:scale-95 transition-all duration-300">
         {bg}
       </div>
       <h1 className="text-2xl font-semibold bg-gradient-to-br from-black to-zinc-600 bg-clip-text text-transparent ">
         {title}
       </h1>
-      <p className="mt-3 text-center text-zinc-700 mb-5 text-balance ">
-        {description} 
-        
-        
-      </p>
+      <div className="prose-sm mb-4 mt-3 leading-normal text-center text-gray-500 [text-wrap:balance] md:prose">
+        <Markdown
+          components={{
+            a: ({ node, ...props }) => (
+              <a
+                target="_blank"
+                {...props}
+                className="font-medium text-gray-800 underline transition-colors"
+              />
+            ),
+            code: ({ node, ...props }) => (
+              <code
+                {...props}
+                // @ts-ignore (to fix "Received `true` for a non-boolean attribute `inline`." warning)
+                inline="true"
+                className="rounded-sm bg-gray-100 px-1 py-0.5 font-mono font-medium text-gray-800"
+              />
+            ),
+          }}
+        >
+          {description}
+        </Markdown>
+      </div>
     </div>
   );
 };

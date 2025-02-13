@@ -18,12 +18,12 @@ import { Link } from "react-router";
 type Props = {};
 
 export default function Home({}: Props) {
-  
+  // Precedent comes with authentication via [Clerk](https://clerk.com/)
   const cardData = [
     {
       title: "Modern Stack",
       description:
-        "Powered by Redis, Kafka, TypeScript, and more for high performance.",
+        "Powered by [Redis](https://redis.io/), [Kafka](https://kafka.apache.org/), [TypeScript](https://www.typescriptlang.org/), and more for high performance.",
       bg: (
         <div className="flex gap-32">
           <DiRedis className="text-7xl text-zinc-800" />{" "}
@@ -36,7 +36,7 @@ export default function Home({}: Props) {
     {
       title: "Real-time Communication",
       description:
-        "ChatterBox uses Socket.io for instant message delivery with low latency.",
+        "ChatterBox uses [Socket.io](https://socket.io/) for instant message delivery with low latency.",
       bg: (
         <div>
           <SiSocketdotio className="text-7xl text-zinc-800" />
@@ -45,17 +45,17 @@ export default function Home({}: Props) {
     },
     {
       title: "Seamless Authentication",
-      description: "Secure and smooth user authentication powered by Clerk.",
+      description: "Secure and smooth user authentication powered by [Better Auth](https://www.better-auth.com/).",
       bg: (
-        <div>
-          <SiClerk className="text-7xl text-zinc-800" />
+        <div className="aspect-square w-20">
+          <img src="/better-auth.png" alt="better auth logo"  />
         </div>
       ),
     },
     {
       title: "Built for Scale",
       description:
-        "Designed for scalability and can handle high traffic loads.",
+        "Designed for `scalability` and can handle high traffic loads.",
       bg: (
         <div>
           <SiAmazonrds className="text-7xl text-zinc-800" />
@@ -65,7 +65,7 @@ export default function Home({}: Props) {
 
     {
       title: "Real-Time Alerts",
-      description: "ChatterBox sends real-time alerts to your team members.",
+      description: "ChatterBox sends `real-time` alerts to your team members.",
       bg: (
         <div>
           <RiNotificationBadgeFill className="text-7xl text-zinc-800" />

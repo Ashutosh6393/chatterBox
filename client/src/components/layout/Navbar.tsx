@@ -2,6 +2,7 @@ import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
 import { authClient } from "@/lib/auth-client";
+import { FaGoogle } from "react-icons/fa";
 
 import {
   Dialog,
@@ -9,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
 
 import useScroll from "@/lib/hooks/useScroll";
@@ -67,14 +69,26 @@ const Navbar = () => {
           <Button onClick={logoutHandler}>Logout</Button>
         ) : (
           <Dialog>
-            <DialogTrigger className="rounded-full font-normal text-xs md:text-sm lg:text-base">
-              Login
+            <DialogTrigger asChild>
+              <Button className="rounded-full font-normal text-xs md:text-sm lg:text-base">
+                Login
+              </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="text-center">Login</DialogTitle>
+                <DialogTitle className="text-center font-bold text-3xl">
+                  Login
+                </DialogTitle>
+                <DialogDescription className="text-center text-base">
+                  Welcome back!
+                </DialogDescription>
               </DialogHeader>
-              <Button onClick={loginHandler}>Login with Google</Button>
+              <div className="flex justify-center items-center gap-4">
+                <Button onClick={loginHandler} className="flex-1">
+                  <FaGoogle />
+                  Login with Google
+                </Button>
+              </div>
             </DialogContent>
           </Dialog>
         )}
