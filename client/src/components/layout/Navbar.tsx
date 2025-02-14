@@ -1,9 +1,9 @@
-import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
-import { Link } from "react-router";
-import { Button } from "../ui/button";
-import { authClient } from "@/lib/auth-client";
+import useScroll from "@/lib/hooks/useScroll";
+import { RootState, } from "@/store/store";
+import { useSelector } from "react-redux";
 import { FaGoogle } from "react-icons/fa";
-
+import { Button } from "../ui/button";
+import { Link } from "react-router";
 import {
   Dialog,
   DialogContent,
@@ -13,41 +13,11 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-import useScroll from "@/lib/hooks/useScroll";
-import { useEffect, useState } from "react";
 
-const loginHandler = async () => {
-  const data = await authClient.signIn.social({
-    provider: "google",
-    callbackURL: import.meta.env.VITE_BASE_URL + "/chat",
-  });
-
-  console.log(data);
-};
-
-const logoutHandler = async () => {
-  const data = await authClient.signOut();
-
-  console.log(data);
-};
 
 const Navbar = () => {
   const scrolled = useScroll(10);
-
-  const [session, setSession] = useState(null);
-
-  useEffect(() => {
-    async function checkAuth() {
-      const { data: session, error } = await authClient.getSession();
-      if (error) {
-        console.error(error);
-      }
-
-      setSession(session);
-    }
-
-    checkAuth();
-  }, []);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   return (
     <div
@@ -59,14 +29,14 @@ const Navbar = () => {
     >
       <div className="px-5 max-w-7xl w-full mx-auto  flex justify-between items-center">
         <div className="flex justify-center items-center gap-2 lg:gap-4 text-zinc-800 text-lg lg:text-3xl">
-          <HiMiniChatBubbleLeftRight />
+          <img src="/logo-s.png" alt="better auth logo" />
           <Link to="/" className="text-lg lg:text-2xl font-medium">
             Chatterbox
           </Link>
         </div>
 
-        {session ? (
-          <Button onClick={logoutHandler}>Logout</Button>
+        {isAuthenticated ? (
+          <Button>Logout</Button>
         ) : (
           <Dialog>
             <DialogTrigger asChild>
@@ -84,7 +54,7 @@ const Navbar = () => {
                 </DialogDescription>
               </DialogHeader>
               <div className="flex justify-center items-center gap-4">
-                <Button onClick={loginHandler} className="flex-1">
+                <Button className="flex-1">
                   <FaGoogle />
                   Login with Google
                 </Button>

@@ -1,29 +1,34 @@
-import { Button } from "@/components/ui/button";
-import { FaGithub } from "react-icons/fa";
-import { DiRedis } from "react-icons/di";
+import { SiApachekafka, SiTypescript, SiSocketdotio } from "react-icons/si";
 import { RiNotificationBadgeFill } from "react-icons/ri";
+import { Button } from "@/components/ui/button";
 import { SiAmazonrds } from "react-icons/si";
-
+import { useNavigate } from "react-router";
+import { FaGithub } from "react-icons/fa";
+import { RootState } from "@/store/store";
 import Card from "@/components/home/Card";
-
-import {
-  SiApachekafka,
-  SiTypescript,
-  SiSocketdotio,
-  SiClerk,
-} from "react-icons/si";
-
+import { DiRedis } from "react-icons/di";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
+import { useEffect } from "react";
 
-type Props = {};
+export default function Home() {
+  const navigate = useNavigate();
 
-export default function Home({}: Props) {
-  // Precedent comes with authentication via [Clerk](https://clerk.com/)
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/chat");
+    } else {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
+
   const cardData = [
     {
       title: "Modern Stack",
       description:
-        "Powered by [Redis](https://redis.io/), [Kafka](https://kafka.apache.org/), [TypeScript](https://www.typescriptlang.org/), and more for high performance.",
+        "Powered by [Redis](https://redis.io/) for fast caching, [Kafka](https://kafka.apache.org/) realtime streaming, [TypeScript](https://www.typescriptlang.org/), and more for high and scalable performance.",
       bg: (
         <div className="flex gap-32">
           <DiRedis className="text-7xl text-zinc-800" />{" "}
@@ -45,10 +50,11 @@ export default function Home({}: Props) {
     },
     {
       title: "Seamless Authentication",
-      description: "Secure and smooth user authentication powered by [Better Auth](https://www.better-auth.com/).",
+      description:
+        "Secure and smooth user authentication powered by [Better Auth](https://www.better-auth.com/).",
       bg: (
         <div className="aspect-square w-20">
-          <img src="/better-auth.png" alt="better auth logo"  />
+          <img src="/better-auth.png" alt="better auth logo" />
         </div>
       ),
     },
@@ -82,7 +88,11 @@ export default function Home({}: Props) {
           className="rounded-full justify-center items-center mx-auto text-zinc-600"
           asChild
         >
-          <a href="https://github.com/Ashutosh6393/chatterBox" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/Ashutosh6393/chatterBox"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub />
             Introducing ChatterBox
           </a>
@@ -97,7 +107,7 @@ export default function Home({}: Props) {
         <div className="mt-6 flex justify-center">
           <Button
             asChild
-            className="rounded-full bg-zinc-800 shadow-zinc-500 shadow-md"
+            className="rounded-full bg-zinc-800 shadow-zinc-500 shadow-md hover:bg-zinc-700"
           >
             <Link to="/login">Start Server</Link>
           </Button>

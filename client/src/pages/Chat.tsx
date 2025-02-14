@@ -1,7 +1,5 @@
 
-type Props = {}
-
-const Chat = (props: Props) => {
+const Chat = ( ) => {
   return (
     <div>Welcome to the chat application </div>
   )
