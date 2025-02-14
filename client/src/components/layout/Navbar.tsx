@@ -1,23 +1,22 @@
-import useScroll from "@/lib/hooks/useScroll";
-import { RootState, } from "@/store/store";
-import { useSelector } from "react-redux";
-import { FaGoogle } from "react-icons/fa";
-import { Button } from "../ui/button";
+import useScroll from "@/hooks/useScroll";
+import { RootState } from "@/store/store";
+import { useSelector, useDispatch } from "react-redux";
+import {  logout as authLogout } from "@/store/features/authSlice";
+import { logout } from "@/lib/utils";
+import { AppDispatch } from "@/store/store";
 import { Link } from "react-router";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog";
-
-
+import LoginDialog from "../shared/LoginDialog";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const scrolled = useScroll(10);
+  const dispatch = useDispatch<AppDispatch>();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  const handleLogout = ()=>{
+    logout();
+    dispatch(authLogout());
+  }
 
   return (
     <div
@@ -36,31 +35,13 @@ const Navbar = () => {
         </div>
 
         {isAuthenticated ? (
-          <Button>Logout</Button>
+          <Button onClick={handleLogout}>Logout</Button>
         ) : (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="rounded-full font-normal text-xs md:text-sm lg:text-base">
-                Login
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle className="text-center font-bold text-3xl">
-                  Login
-                </DialogTitle>
-                <DialogDescription className="text-center text-base">
-                  Welcome back!
-                </DialogDescription>
-              </DialogHeader>
-              <div className="flex justify-center items-center gap-4">
-                <Button className="flex-1">
-                  <FaGoogle />
-                  Login with Google
-                </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
+          <LoginDialog>
+            <Button className="rounded-full font-normal text-xs md:text-sm lg:text-base">
+              Login
+            </Button>
+          </LoginDialog>
         )}
       </div>
     </div>

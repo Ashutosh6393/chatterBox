@@ -2,27 +2,48 @@ import { SiApachekafka, SiTypescript, SiSocketdotio } from "react-icons/si";
 import { RiNotificationBadgeFill } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
 import { SiAmazonrds } from "react-icons/si";
-import { useNavigate } from "react-router";
 import { FaGithub } from "react-icons/fa";
 import { RootState } from "@/store/store";
 import Card from "@/components/home/Card";
 import { DiRedis } from "react-icons/di";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router";
 import { useEffect } from "react";
+import { AppDispatch } from "@/store/store";
+import { authClient } from "@/lib/auth-client";
+import { login } from "@/store/features/authSlice";
 
 export default function Home() {
-  const navigate = useNavigate();
+  const dispatch =  useDispatch<AppDispatch>();
 
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/chat");
-    } else {
-      navigate("/");
+  try {
+    const {data} = authClient.useSession();
+    if(data){
+      console.log(data);
+      const {user} = data;
+      dispatch(login({name: user.name, email: user.email, profilePicture: user.image}));
     }
-  }, [isAuthenticated]);
+    
+  } catch (error) {
+    console.error("Error fetching session", error);
+    
+  }
+
+
+ 
+
+  
+
+//   const { 
+//     data: session, 
+//     isPending, //loading state
+//     error, //error object
+//     refetch //refetch the session
+// } = authClient.useSession() 
+
+
 
   const cardData = [
     {
