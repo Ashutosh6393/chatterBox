@@ -1,22 +1,33 @@
 import useScroll from "@/hooks/useScroll";
-import { RootState } from "@/store/store";
-import { useSelector, useDispatch } from "react-redux";
-import {  logout as authLogout } from "@/store/features/authSlice";
+import {  useDispatch } from "react-redux";
+import { logout as authLogout } from "@/store/features/authSlice";
 import { logout } from "@/lib/utils";
 import { AppDispatch } from "@/store/store";
 import { Link } from "react-router";
 import LoginDialog from "../shared/LoginDialog";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useState } from "react";
+import { CgSpinner } from "react-icons/cg";
+import useAuth from "@/hooks/useAuth";
 
 const Navbar = () => {
+  const {isAuthenticated} = useAuth();
   const scrolled = useScroll(10);
   const dispatch = useDispatch<AppDispatch>();
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogout = ()=>{
-    logout();
-    dispatch(authLogout());
-  }
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      await logout();
+      dispatch(authLogout());
+    } catch (error) {
+      toast("Error logging out");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div
@@ -35,7 +46,9 @@ const Navbar = () => {
         </div>
 
         {isAuthenticated ? (
-          <Button onClick={handleLogout}>Logout</Button>
+          <Button disabled={isLoading} onClick={handleLogout}>
+            {isLoading && <CgSpinner className="animate-spin text-xl" />}Logout
+          </Button>
         ) : (
           <LoginDialog>
             <Button className="rounded-full font-normal text-xs md:text-sm lg:text-base">

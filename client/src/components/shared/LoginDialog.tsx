@@ -10,7 +10,6 @@ import { FaGoogle } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { CgSpinner } from "react-icons/cg";
-
 import { login } from "@/lib/utils";
 import { useState } from "react";
 
@@ -19,18 +18,19 @@ type Props = {
 };
 
 const LoginDialog = ({ children }: Props) => {
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     setIsLoading(true);
     try {
       await login();
     } catch (error) {
-      toast("Event has been created.");
+      toast("Error logging in!");
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -45,11 +45,11 @@ const LoginDialog = ({ children }: Props) => {
         </DialogHeader>
         <div className="flex justify-center items-center gap-4">
           <Button
-            disabled={loading}
+            disabled={isLoading}
             className={`flex-1 `}
             onClick={handleLogin}
           >
-            {loading && <CgSpinner className="animate-spin text-xl" />}
+            {isLoading && <CgSpinner className="animate-spin text-xl" />}
             <FaGoogle />
             Login with Google
           </Button>

@@ -9,9 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export const login = async () => {
   await authClient.signIn.social({
     provider: "google",
-
     callbackURL: import.meta.env.VITE_BASE_URL ,
-
     disableRedirect: false,
   });
 };
