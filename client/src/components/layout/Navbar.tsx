@@ -1,20 +1,19 @@
-import useScroll from "@/hooks/useScroll";
-import {  useDispatch } from "react-redux";
 import { logout as authLogout } from "@/store/features/authSlice";
-import { logout } from "@/lib/utils";
-import { AppDispatch } from "@/store/store";
-import { Link } from "react-router";
 import LoginDialog from "../shared/LoginDialog";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { useState } from "react";
+import { useAppDispatch } from "@/store/store";
 import { CgSpinner } from "react-icons/cg";
+import useScroll from "@/hooks/useScroll";
 import useAuth from "@/hooks/useAuth";
+import { logout } from "@/lib/utils";
+import { Link } from "react-router";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const {isAuthenticated} = useAuth();
   const scrolled = useScroll(10);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {

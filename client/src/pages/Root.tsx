@@ -3,12 +3,13 @@ import { RiNotificationBadgeFill } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
 import { SiAmazonrds } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
-import Card from "@/components/home/Card";
+import { Card, LoginDialog } from "@/components/index";
 import { DiRedis } from "react-icons/di";
 import { Link } from "react-router";
-
+import useAuth from "@/hooks/useAuth";
 
 export default function Root() {
+  const { isAuthenticated } = useAuth();
 
   const cardData = [
     {
@@ -74,14 +75,14 @@ export default function Root() {
           className="rounded-full justify-center items-center mx-auto text-zinc-600"
           asChild
         >
-          <a
-            href="https://github.com/Ashutosh6393/chatterBox"
+          <Link
+            to="https://github.com/Ashutosh6393/chatterBox"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub />
             Introducing ChatterBox
-          </a>
+          </Link>
         </Button>
         <h1 className=" mt-6 text-7xl font-extrabold font-dm text-center bg-gradient-to-br  from-black to-zinc-500 bg-clip-text text-transparent tracking-[-0.02em] leading-[5rem] [text-wrap:balance] drop-shadow-sm ">
           Connect Instantly, Chat Effortlessly
@@ -91,12 +92,20 @@ export default function Root() {
           scalable chat application.
         </p>
         <div className="mt-6 flex justify-center">
-          <Button
-            asChild
-            className="rounded-full bg-zinc-800 shadow-zinc-500 shadow-md hover:bg-zinc-700"
-          >
-            <Link to="/login">Start Server</Link>
-          </Button>
+          {isAuthenticated ? (
+            <Button
+              asChild
+              className="rounded-full bg-zinc-800 shadow-zinc-500 shadow-md hover:bg-zinc-700"
+            >
+              <Link to="/chat">Start Server</Link>
+            </Button>
+          ) : (
+            <LoginDialog>
+              <Button className="rounded-full bg-zinc-800 shadow-zinc-500 shadow-md hover:bg-zinc-700">
+                Start Server
+              </Button>
+            </LoginDialog>
+          )}
         </div>
       </div>
 

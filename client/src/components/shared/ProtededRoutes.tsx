@@ -1,14 +1,9 @@
+import useAuth from "@/hooks/useAuth";
 import { Outlet} from "react-router";
 import { Navigate } from "react-router";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-
 
 const ProtectedRoutes = ( ) => {
-
-  const {isAuthenticated} = useSelector((state: RootState) => state.auth);
-  console.log("from protected routes: ", isAuthenticated);
-
+  const {isAuthenticated} = useAuth();
   return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };
 
