@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { authClient } from "@/lib/auth-client"; // Import the auth client
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { authClient } from "@/lib/auth-client"; 
 
 // Define the user type
 interface User {
@@ -64,10 +64,9 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.status = "succeeded";
       })
-      .addCase(fetchUserSession.rejected, (state, action) => {
+      .addCase(fetchUserSession.rejected, (state) => {
         state.isLoading = false;
         state.status = "failed";
-        console.error("Session fetch failed:", action.payload);
       });
   },
 });

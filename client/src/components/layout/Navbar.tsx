@@ -11,21 +11,24 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const Navbar = () => {
-  const {isAuthenticated} = useAuth();
+  const { isAuthenticated } = useAuth();
   const scrolled = useScroll(10);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {
     setIsLoading(true);
-    try {
-      await logout();
-      dispatch(authLogout());
-    } catch (error) {
-      toast("Error logging out");
-    } finally {
-      setIsLoading(false);
-    }
+    logout()
+      .then(() => {
+        dispatch(authLogout());
+        toast("Logout successfull!");
+      })
+      .catch((err) => {
+        console.log("Error logging out! :", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

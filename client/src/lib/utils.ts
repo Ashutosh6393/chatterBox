@@ -9,16 +9,11 @@ export function cn(...inputs: ClassValue[]) {
 export const login = async () => {
   await authClient.signIn.social({
     provider: "google",
-    callbackURL: import.meta.env.VITE_BASE_URL ,
+    callbackURL: import.meta.env.VITE_BASE_URL,
     disableRedirect: false,
   });
 };
 
 export const logout = async () => {
-  const data = await authClient.signOut()
-  console.log("logout from utils: ", data);
+  await authClient.signOut();
 };
-
-export const getSession = async ()=>{
-
-}

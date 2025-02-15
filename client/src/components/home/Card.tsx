@@ -21,7 +21,7 @@ const Card = ({ title, description, bg, large = false }: Props) => {
       <h1 className="text-2xl font-semibold bg-gradient-to-br from-black to-zinc-600 bg-clip-text text-transparent ">
         {title}
       </h1>
-      <div className="prose-sm mb-4 mt-3 flex-1  leading-normal text-center text-gray-500 [text-wrap:balance] md:prose">
+      <div className="prose-sm mb-4 mt-3 flex-1  leading-normal text-center text-gray-500 text-wrap:balance md:prose">
         <Markdown
           components={{
             a: ({ node, ...props }) => (
