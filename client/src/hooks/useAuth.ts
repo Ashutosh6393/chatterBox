@@ -1,22 +1,23 @@
-import { fetchUserSession } from "@/store/features/authSlice";
-import { useAppDispatch, useAppSelector } from "@/store/store";
-import { useEffect } from "react";
+// // import { fetchUserSession } from "@/store/features/authSlice";
+// import { useAppDispatch, useAppSelector } from "@/store/store";
+// import { useEffect } from "react";
 
-const useAuth = () => {
-  const dispatch = useAppDispatch();
-  const { isAuthenticated, user, isLoading, status } = useAppSelector(
-    (state) => state.auth
-  );
+// const useAuth = () => {
+//   const dispatch = useAppDispatch();
+//   const { isAuthenticated, user } = useAppSelector(
+//     (state) => state.auth
+//   );
 
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchUserSession());
-      console.log("session dispatch called");
-    }
-    console.log("useEffect auth called");
-  }, [dispatch, status]);
+//   useEffect(() => {
+//     if (status === "idle") {
+//       // dispatch(fetchUserSession());
 
-  return { isAuthenticated, user, isLoading };
-};
+//       // console.log("session dispatch called");
+//     }
+//     // console.log("useEffect auth called");
+//   }, [dispatch, status]);
 
-export default useAuth;
+//   return { isAuthenticated, user, isLoading, status };
+// };
+
+// export default useAuth;

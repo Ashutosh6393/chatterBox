@@ -1,12 +1,12 @@
-import useAuth from "@/hooks/useAuth"
+// import useAuth from "@/hooks/useAuth"
 import { useNavigate } from "react-router";
 const Chat = ( ) => {
   const navigate = useNavigate();
-  const {isAuthenticated} = useAuth();
+  // const {isAuthenticated} = useAuth();
 
-  if(!isAuthenticated){
-    navigate("/")
-  }
+  // if(!isAuthenticated){
+  //   navigate("/")
+  // }
   return (
     <div>Welcome to the chat application </div>
   )

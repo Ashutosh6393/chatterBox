@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/store/store";
 import { CgSpinner } from "react-icons/cg";
 import useScroll from "@/hooks/useScroll";
-import useAuth from "@/hooks/useAuth";
+import { useAppSelector } from "@/store/store";
 import { logout } from "@/lib/utils";
 import { Link } from "react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAppSelector(store => store.auth);
   const scrolled = useScroll(10);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);

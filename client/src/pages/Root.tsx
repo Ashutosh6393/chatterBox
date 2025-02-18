@@ -6,10 +6,12 @@ import { FaGithub } from "react-icons/fa";
 import { Card, LoginDialog } from "@/components/index";
 import { DiRedis } from "react-icons/di";
 import { Link } from "react-router";
-import useAuth from "@/hooks/useAuth";
+import { useAppSelector } from "@/store/store";
+// import useAuth from "@/hooks/useAuth";
 
 export default function Root() {
-  const { isAuthenticated } = useAuth();
+
+  const {isAuthenticated} = useAppSelector(store=> store.auth)
 
   const cardData = [
     {
