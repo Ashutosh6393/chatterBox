@@ -6,31 +6,28 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { CgSpinner } from "react-icons/cg";
 import { FaGoogle } from "react-icons/fa";
 import { Button } from "../ui/button";
-import { toast } from "sonner";
-import { CgSpinner } from "react-icons/cg";
-import { login } from "@/lib/utils";
 import { useState } from "react";
 
+type loginHandlerType = ()=> Promise<void>;
+
 type Props = {
+  loginHandler: loginHandlerType;
   children: React.ReactNode;
 };
 
-const LoginDialog = ({ children }: Props) => {
+const LoginDialog = ({ children,  loginHandler}: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async () => {
+  function handleLogin(){
     setIsLoading(true);
-    try {
-      await login();
-    } catch (error) {
-      toast("Error logging in!");
-    } finally {
+    loginHandler().then(()=>{
       setIsLoading(false);
-    }
-  };
-
+    })
+    
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>

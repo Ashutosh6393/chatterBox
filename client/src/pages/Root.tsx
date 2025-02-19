@@ -1,17 +1,17 @@
 import { SiApachekafka, SiTypescript, SiSocketdotio } from "react-icons/si";
 import { RiNotificationBadgeFill } from "react-icons/ri";
+import { Card, LoginDialog } from "@/components/index";
+import { authLogin, getErrorMessage } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/store/store";
 import { SiAmazonrds } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
-import { Card, LoginDialog } from "@/components/index";
 import { DiRedis } from "react-icons/di";
 import { Link } from "react-router";
-import { useAppSelector } from "@/store/store";
-// import useAuth from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 export default function Root() {
-
-  const {isAuthenticated} = useAppSelector(store=> store.auth)
+  const { isAuthenticated } = useAppSelector((store) => store.auth);
 
   const cardData = [
     {
@@ -69,6 +69,18 @@ export default function Root() {
     },
   ];
 
+  const handleLogin = async () => {
+    try {
+      await authLogin();
+    } catch (error) {
+      let message = getErrorMessage(error);
+      toast("Unable to login", {
+        position: "top-right",
+        description: message,
+      });
+    }
+  };
+
   return (
     <>
       <div className="z-10 max-w-2xl flex flex-col ">
@@ -102,7 +114,7 @@ export default function Root() {
               <Link to="/chat">Start Server</Link>
             </Button>
           ) : (
-            <LoginDialog>
+            <LoginDialog loginHandler={handleLogin}>
               <Button className="rounded-full bg-zinc-800 shadow-zinc-500 shadow-md hover:bg-zinc-700">
                 Start Server
               </Button>
