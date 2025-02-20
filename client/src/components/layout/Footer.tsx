@@ -21,7 +21,7 @@ const Footer = () => {
           className="text-gray-500 text-base hover:scale-105 transition-all hover:bg-white hover:text-gray-500"
         >
           <a target="_blank" href="https://buymeacoffee.com/ashutoshcodes">
-            <SiBuymeacoffee className="text-black text-xl" />
+            <SiBuymeacoffee className="text-black" />
             Buy me a coffee
           </a>
         </Button>

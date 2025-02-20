@@ -83,7 +83,7 @@ export default function Root() {
 
   return (
     <>
-      <div className="z-10 max-w-2xl flex flex-col ">
+      <div className="z-10 max-w-2xl flex flex-col py-32">
         <Button
           variant="outline"
           className="rounded-full justify-center items-center mx-auto text-zinc-600"
