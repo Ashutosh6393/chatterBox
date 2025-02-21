@@ -27,37 +27,52 @@ const SideBar = (props: Props) => {
         className="w-full h-full p-2 rounded-lg shadow-lg flex flex-col shadow-zinc-500/5  bg-white "
       >
         <TabsList className="w-full ">
-          <TabsTrigger value="account" className="flex-1">
+          <TabsTrigger value="friends" className="flex-1">
             Friends
           </TabsTrigger>
-          <TabsTrigger value="password" className="flex-1">
+          <TabsTrigger value="rooms" className="flex-1">
             Rooms
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="account" className="h-[90%]">
+        <TabsContent value="friends" className="flex-1 h-0">
           <div className="flex flex-col h-full">
-            <Button className="rounded-full flex-0" variant={"secondary"}>
+            <Button className="rounded-full" variant={"secondary"}>
               Add a Friend
               <RiAddLargeFill />
             </Button>
             <Separator className="my-2" />
-            <ScrollArea className=" mt-2 flex-1">
+            <ScrollArea className=" mt-2">
               <ListItem />
               <ListItem />
               <ListItem />
               <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+     
           
             </ScrollArea>
           </div>
         </TabsContent>
-        <TabsContent value="password">
+        <TabsContent value="rooms" className="flex-1 h-0">
         <div className="flex flex-col h-full">
-            <Button className="rounded-full flex-0" variant={"secondary"}>
+            <Button className="rounded-full" variant={"secondary"}>
               Create a Room
               <RiAddLargeFill />
             </Button>
             <Separator className="my-2" />
-            <ScrollArea className=" mt-2 flex-1">
+            <ScrollArea className=" mt-2 ">
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
               <ListItem />
               <ListItem />
               <ListItem />
