@@ -24,7 +24,7 @@ const SideBar = (props: Props) => {
     <>
       <Tabs
         defaultValue="account"
-        className="w-[400px] h-full p-2 rounded-lg shadow-lg flex flex-col shadow-zinc-500/5  bg-white "
+        className="w-full h-full p-2 rounded-lg shadow-lg flex flex-col shadow-zinc-500/5  bg-white "
       >
         <TabsList className="w-full ">
           <TabsTrigger value="account" className="flex-1">
@@ -46,25 +46,25 @@ const SideBar = (props: Props) => {
               <ListItem />
               <ListItem />
               <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
-              <ListItem />
+          
             </ScrollArea>
           </div>
         </TabsContent>
         <TabsContent value="password">
-          <ScrollArea>your rooms here</ScrollArea>
+        <div className="flex flex-col h-full">
+            <Button className="rounded-full flex-0" variant={"secondary"}>
+              Create a Room
+              <RiAddLargeFill />
+            </Button>
+            <Separator className="my-2" />
+            <ScrollArea className=" mt-2 flex-1">
+              <ListItem />
+              <ListItem />
+              <ListItem />
+              <ListItem />
+          
+            </ScrollArea>
+          </div>
         </TabsContent>
       </Tabs>
     </>
